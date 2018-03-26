@@ -20,7 +20,7 @@ modelagem. O curso é fortemente inspirado no curso [*Applied Predictive Modelin
 - **Estratégias Gerais**: separação da base de dados, reamostragem, *tuning* de modelos
 - **Pré-processamento**: transformações, filtrar variáveis, etc.
 - **Convenções no R**: API das funções, fórmulas, consistencia
-- **Building and tuning models**: métricas de performance, árvores, e modelos de regressão
+- **Construção dos modelos**: métricas de performance, árvores, e modelos de regressão
 - **Outros tópicos**: comparando modelos por reamostragem, processamento paralelo
 
 
