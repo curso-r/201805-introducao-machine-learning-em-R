@@ -11,13 +11,25 @@
     
     
     <item>
+      <title>Caret</title>
+      <link>/caret/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/caret/</guid>
+      <description>Download
+Duração 2 horas
+ Resumo  O pacote caret Validação cruzada Estimando performance Selecionando variáveis Regressão Linear Árvores de decisão   Referências  GitHub Caret Site Caret Applied Predictive Modelling in R - Use R Applied Predictive Modelling - Livro   </description>
+    </item>
+    
+    <item>
       <title>Estratégias Gerais</title>
       <link>/estrategias/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/estrategias/</guid>
       <description>Download
-Tempo  1 hora   Resumo  Base de treino, teste e validação Validação Cruzada Estimação da performance do modelo   Referências  Seção 7.10 - Elements of Statistical Leaning Structure Machine Learning Projects - Cousera Cap 5 - Introduction to Statistical Learning   </description>
+Duração 1 hora
+ Resumo  Base de treino, teste e validação Validação Cruzada Estimação da performance do modelo   Referências  Seção 7.10 - Elements of Statistical Leaning Structure Machine Learning Projects - Cousera Cap 5 - Introduction to Statistical Learning   </description>
     </item>
     
     <item>
@@ -27,27 +39,19 @@ Tempo  1 hora   Resumo  Base de treino, teste e validação Validação Cruzada 
       
       <guid>/intro/</guid>
       <description>Download
-Duração  45 minutos   Resumo  O que é Machine Learning Machine Leanring e sua relação com a estatística O hype do Machine Learning e consequências p/ o estatístico Entendendo o problema   Referências  Slide 3 - Applied Predicte Modeling - Use R Statistical Modeling: The two Cultures Cap1 - Elements of Statistical Leaning   </description>
+Duração 45 minutos
+ Resumo  O que é Machine Learning Machine Leanring e sua relação com a estatística O hype do Machine Learning e consequências p/ o estatístico Entendendo o problema   Referências  Slide 3 - Applied Predicte Modeling - Use R Statistical Modeling: The two Cultures Cap1 - Elements of Statistical Leaning   </description>
     </item>
     
     <item>
-      <title>Manipulação</title>
-      <link>/manip/</link>
+      <title>Outros Tópicos</title>
+      <link>/outros-topicos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/manip/</guid>
+      <guid>/outros-topicos/</guid>
       <description>Download
-Resumo  Referências  </description>
-    </item>
-    
-    <item>
-      <title>Visualização</title>
-      <link>/visualizacao/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/visualizacao/</guid>
-      <description>Download
-Resumo  Referências  </description>
+Duração 2 horas
+ Resumo  Regularização / LASSO Random Forests Tuning de hiperparâmetros   Referências  Cap 6 e 8 - Introduction to Statistical Learning Cap 3 e 9 - Elements of Statistical Learning Site Caret   </description>
     </item>
     
   </channel>

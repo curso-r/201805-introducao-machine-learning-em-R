@@ -1,0 +1,22 @@
+---
+title: Outros Tópicos
+---
+
+<a href = "../visualizacao.zip"><button>Download</button></a>
+
+# Duração
+
+2 horas
+
+# Resumo
+
+* Regularização / LASSO
+* Random Forests
+* _Tuning_ de hiperparâmetros
+
+# Referências
+
+- [Cap 6 e 8 - Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf)
+- [Cap 3 e 9 - Elements of Statistical Learning](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)
+- [Site Caret](http://topepo.github.io/caret/index.html)
+

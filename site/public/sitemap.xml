@@ -3,6 +3,10 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/caret/</loc>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
     <priority>0</priority>
   </url>
@@ -20,16 +24,12 @@
   </url>
   
   <url>
-    <loc>/manip/</loc>
+    <loc>/outros-topicos/</loc>
   </url>
   
   <url>
     <loc>/tags/</loc>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/visualizacao/</loc>
   </url>
   
 </urlset>

@@ -4,9 +4,9 @@ title: Estratégias Gerais
 
 <a href = "../case.zip"><button>Download</button></a>
 
-# Tempo 
+# Duração 
 
-- 1 hora
+1 hora
 
 # Resumo
 

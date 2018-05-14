@@ -1,0 +1,25 @@
+---
+title: Caret
+---
+
+<a href = "../manip.zip"><button>Download</button></a>
+
+# Duração
+
+2 horas
+
+# Resumo
+
+- O pacote `caret`
+- Validação cruzada
+- Estimando performance
+- Selecionando variáveis
+- Regressão Linear
+- Árvores de decisão
+
+# Referências
+
+- [GitHub Caret](https://github.com/topepo/caret)
+- [Site Caret](http://topepo.github.io/caret/index.html)
+- [Applied Predictive Modelling in R - Use R](http://appliedpredictivemodeling.com/user2014/)
+- [Applied Predictive Modelling - Livro](http://appliedpredictivemodeling.com/)

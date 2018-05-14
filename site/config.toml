@@ -25,12 +25,12 @@ footnotereturnlinkcontents = "↩"
     url = "/estrategias/"
     weight = 3
 [[menu.main]]
-    name = "Visualização"
-    url = "/visualizacao/"
+    name = "Caret"
+    url = "/caret/"
     weight = 4
 [[menu.main]]
-    name = "Case"
-    url = "/case/"
+    name = "Outros Tópicos"
+    url = "/outros-topicos/"
     weight = 5
 
 [params]
