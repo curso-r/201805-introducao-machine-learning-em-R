@@ -1,0 +1,25 @@
+---
+title: Estratégias Gerais
+---
+
+<a href = "../case.zip"><button>Download</button></a>
+
+# Tempo 
+
+- 1 hora
+
+# Resumo
+
+- Base de treino, teste e validação
+- Validação Cruzada
+- Estimação da performance do modelo
+
+# Referências
+
+- [Seção 7.10 - Elements of Statistical Leaning](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)
+- [Structure Machine Learning Projects - Cousera](https://pt.coursera.org/learn/machine-learning-projects/lecture/78P8f/train-dev-test-distributions)
+- [Cap 5 - Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf)
+
+
+
+

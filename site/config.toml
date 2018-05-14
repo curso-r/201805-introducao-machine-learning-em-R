@@ -21,8 +21,8 @@ footnotereturnlinkcontents = "↩"
     url = "/intro/"
     weight = 2
 [[menu.main]]
-    name = "Manipulação"
-    url = "/manip/"
+    name = "Estratégias"
+    url = "/estrategias/"
     weight = 3
 [[menu.main]]
     name = "Visualização"
