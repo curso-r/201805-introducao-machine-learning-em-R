@@ -4,6 +4,18 @@ title: Introdução
 
 <a href = "../intro.zip"><button>Download</button></a>
 
+# Duração
+
+- 30 minutos
+
 # Resumo
 
+* O que é Machine Learning
+* Machine Leanring e sua relação com a estatística
+* O hype do Machine Learning e consequências p/ o estatístico
+
 # Referências
+
+- [Slide 3 - Applied Predicte Modeling - Use R](https://static1.squarespace.com/static/51156277e4b0b8b2ffe11c00/t/53ad86e5e4b0b52e4e71cfab/1403881189332/Applied_Predictive_Modeling_in_R.pdf)
+- [Statistical Modeling: The two Cultures](http://staff.pubhealth.ku.dk/~tag/Teaching/share/material/Breiman-two-cultures.pdf)
+- [Cap1 - Elements of Statistical Leaning](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)
