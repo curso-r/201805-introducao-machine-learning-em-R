@@ -11,7 +11,7 @@ title: Introdução
 # Resumo
 
 * O que é Machine Learning
-* Machine Leanring e sua relação com a estatística
+* Machine Learning e sua relação com a estatística
 * O hype do Machine Learning e consequências p/ o estatístico
 * Entendendo o problema
 
