@@ -6,13 +6,14 @@ title: Introdução
 
 # Duração
 
-- 30 minutos
+- 45 minutos
 
 # Resumo
 
 * O que é Machine Learning
 * Machine Leanring e sua relação com a estatística
 * O hype do Machine Learning e consequências p/ o estatístico
+* Entendendo o problema
 
 # Referências
 
