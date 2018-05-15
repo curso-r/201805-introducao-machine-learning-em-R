@@ -1,0 +1,56 @@
+---
+title: "caret"
+subtitle: "Machine Learning com R"
+author: "@Curso-R"
+date: "14-05-2018"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: js/macro.js
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+# Motivação
+
+* Cada pacote do R tem a sua forma de especificar o modelo
+* Cada um também tem a sua forma de especificar predições
+* É normal ter este tipo de inconsistências uma vez que são feitos por autores distintos
+
+## Exemplo
+
+Como pedir a estimativa da probabilidade em um modelo binário em diversas funções/pacotes:
+
+* `lda` (MASS): `predict(obj)`
+* `glm` (stats): `predict(obj, type = "response")`
+* `gbm` (gbm): predict(obj, type = "response", n.trees)
+* `rpart` (rpart): `predict(obj, type = "prob")`
+
+---
+class: center, middle
+
+# Framework Padronizado
+
+## Menor atrito cognitivo para ajustar muitos modelos
+
+![:scale 70%](https://upload.wikimedia.org/wikipedia/commons/b/b5/A_Ariel_view_of_Carot.jpg)
+
+---
+
+# Alternativas
+
+* `mlr`: [https://github.com/mlr-org/mlr](https://github.com/mlr-org/mlr)
+* `parsnip`: [https://github.com/topepo/parsnip](https://github.com/topepo/parsnip) (em desenvolvimento)
+
+![:scale 70%](https://www.simplyrecipes.com/wp-content/uploads/2009/12/parsnips-horiz-1800.jpg)
+
+
+
+
+
