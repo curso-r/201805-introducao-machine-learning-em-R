@@ -1,0 +1,135 @@
+---
+title: "Machine Learning com R"
+subtitle: "Introdução"
+author: "@Curso-R"
+date: "23-05-2018"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["default", "default-fonts", "custom.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: js/macro.js
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+# Sumário
+
+- O que é Machine Learning?
+
+- Machine Learning e Estatísticaa
+
+- O hype do Machine Learning
+
+- Entendendo o problema
+
+---
+
+# O que é Machine Learning?
+
+<br>
+
+- Um campo **dentro** da Inteligência Artificial
+
+--
+
+<img src="img/marvin.png" class="cantodireito" width=100>
+
+--
+
+- Existe um grande hype em volta do tema (~50 artigos por dia no Arxiv!!!)
+
+--
+
+- Não é um termo novo: cunhado por Arthur Samuel, em 1959
+
+<img src="img/arthur-sam.png" class="center2" width=100>
+
+--
+
+- Poderio computacional e disponibilidade de dados
+
+---
+
+# O que é Machine Learning?
+
+Machine Learning é o campo de estudo que dá aos computadores a abilidade de 
+aprender sem serem explicitamente programados para isso (Arthur Samuel, 1959).
+
+<br>
+
+--
+
+Um computador está aprendendo com a experiência E com respeito a alguma tarefa T e uma medida de performance P se sua performance P em T melhora com a experiência E (Tom Mitchell, 1998).
+
+<br>
+
+--
+
+Machine learning é um framework de análise de dados que visa gerar a estimativa mais precisa possível para uma quantidade ou fenômeno (Max Kuhn, 2014).
+
+---
+
+# O que é Machine Learning?
+
+<br>
+
+<img src = "img/nazare.jpg" class = "centerFig">
+
+---
+
+# Machine Learning e Estatística
+
+<img src = "img/box.png" class = "center2">
+
+--
+
+1) Gostaríamos de saber como $x$ e $y$ estão relacionadas.
+
+--
+
+2) Gostaríamos de prever $y$ a partir de $x$.
+
+--
+
+<br>
+
+Matematicamente, queremos encontrar uma função $f()$ tal que:
+
+$$
+y \approx f(x)
+$$
+
+---
+
+# Machine Learning e Estatística
+
+ <img src="img/box-data-models.png" style="display: block; margin-left: auto; margin-right: auto;"> 
+ 
+--
+
+<br>
+<br>
+ 
+  <img src="img/box-algorithmic-models.png" style="display: block; margin-left: auto; margin-right: auto;"> 
+  
+---
+
+# O Hype do Machine Learning
+
+
+---
+
+# Entendendo o problema
+
+>> Pensamento crítico
+
+- Entender o problema
+
+- Manter foco no objetivo
+
