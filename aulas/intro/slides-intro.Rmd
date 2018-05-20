@@ -18,13 +18,35 @@ output:
 options(htmltools.dir.version = FALSE)
 ```
 
+# Quem somos
+
+<img src="img/daniel.jpeg" class="dan">
+
+<img src="img/william.jpg" class="willy">
+
+<div class="dan">
+  <lu>
+    <li> Daniel Falbel </li>
+    <li> dfalbel@curso-r.com </li>
+    <li> IME-USP / Curso-R </li>
+  </lu>
+</div>
+
+<div class="willy">
+  <lu>
+    <li> William Amorim </li>
+    <li> williamorim@curso-r.com </li>
+    <li> IME-USP / Curso-R </li>
+  </lu>
+</div>
+
+---
+
 # Sumário
 
 - O que é Machine Learning?
 
-- Machine Learning e Estatísticaa
-
-- O hype do Machine Learning
+- Machine Learning e Estatística
 
 - Entendendo o problema
 
@@ -79,7 +101,7 @@ Machine learning é um framework de análise de dados que visa gerar a estimativ
 
 <br>
 
-<img src = "img/nazare.jpg" class = "centerFig">
+<img src = "img/nazare.jpg" class = "center2">
 
 ---
 
@@ -109,27 +131,56 @@ $$
 
 # Machine Learning e Estatística
 
- <img src="img/box-data-models.png" style="display: block; margin-left: auto; margin-right: auto;"> 
+ <img src="img/box-data-models.png" class = "center2"> 
  
 --
 
 <br>
 <br>
  
-  <img src="img/box-algorithmic-models.png" style="display: block; margin-left: auto; margin-right: auto;"> 
+  <img src="img/box-algorithmic-models.png" class = "center2"> 
   
 ---
 
-# O Hype do Machine Learning
+# Pensamento crítico
 
-
----
-
-# Entendendo o problema
-
->> Pensamento crítico
+<br>
+<br>
+<br>
 
 - Entender o problema
 
 - Manter foco no objetivo
 
+- Definir a métrica
+
+<img src="https://media.giphy.com/media/sqefuSs2oD8sg/giphy.gif" class="smart_cat">
+
+---
+
+# Entender o problema
+
+<img src="img/aviao.png" class="center2">
+
+---
+
+# Manter foco no objetivo
+
+<img src="img/ozonio.jpeg" class="ozonio">
+
+<img src="img/carros.jpg" class="carros">
+
+---
+
+# Definir a métrica
+
+<img src="img/google.png" class="google">
+
+---
+
+# Definir a métrica
+
+<br>
+<br>
+
+<img src="img/submarino.png" class="center2">

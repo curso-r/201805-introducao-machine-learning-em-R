@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Machine Learning com R</title>
+    <meta charset="utf-8">
+    <meta name="author" content="@Curso-R" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Machine Learning com R
+## Estratégias
+### <span class="citation">@Curso-R</span>
+### 23-05-2018
+
+---
+
+
+
+
+# Sumário
+
+- Viés e variância
+
+- Base treino e base teste
+
+- Validação cruzada
+
+- Estimando a performance do modelo
+
+---
+
+# Viés/variância
+
+- **Viés**: o erro induzido por aproximar um fenômeno real, que pode pode ser extremamente complicado, por um modelo muito mais simples.
+
+- **Variância**: o quanto as estimativas dos parâmetros mudariam se nós os estimarmos usando uma base diferente. 
+
+&lt;!-- We would like our model to have minimum variance and minimum bias. But what we see in practice is that methods that reduce variance usually increases bias and vice-versa. --&gt;
+
+---
+
+# Exemplo
+
+Vamos encontrar um bom modelo para ajustar esse conjunto de 10 pontos.
+
+&lt;img src="slides-estrategias_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Exemplo
+
+**Regressão linear simples**: `\(y = b_0 + b_1x + e\)`
+
+&lt;img src="slides-estrategias_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Exemplo
+
+**Regressão linear simples**: `\(y = b_0 + b_1x + e\)`
+
+&lt;img src="slides-estrategias_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Exemplo
+
+**Modelo quadrático**: `\(y = b_0 + b_1x + b_2x^2 + e\)`
+
+&lt;img src="slides-estrategias_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Exemplo
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Grau do polinômio &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; RMSE &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.204 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.149 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.140 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.140 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.102 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.086 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.063 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.031 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+
+# Exemplo
+
+**Modelo polinomial de grau nove**: `\(y = b_0 + b_1x + b_2x^2 + \cdots + b_9x^9 + e\)`
+
+&lt;img src="slides-estrategias_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Exemplo
+
+E se nós obtermos mais dados? As curvas representam os modelos ajustados com os 10 pontos iniciais.
+
+&lt;img src="slides-estrategias_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Exemplo
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Grau do polinômio &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; RMSE &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.360 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.226 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.199 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.198 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.289 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.360 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.320 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.152 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3.904 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Exemplo
+
+Agora ajustando nos dados novos.
+
+&lt;img src="slides-estrategias_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Exemplo
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; Grau do polinômio &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; RMSE &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.206 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.089 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.089 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.089 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.089 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.089 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.087 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.087 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.087 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Erros de treino e teste
+
+- **Erro de treino**: é o erro encontrado ao aplicar o modelo na própria base utilizada para treiná-lo.
+
+- **Erro de teste**: é o erro encontrado ao aplicar o modelo a uma base não utilizada no treino.
+
+---
+
+# Validação cruzada
+
+**Validação cruzada**: usar uma porção dos dados, que não foi utilizada para no treino, para avaliar o erro de teste.
+
+Tipos:
+
+- Validation set
+- LOOCV
+- k-fold cross-validation
+
+---
+
+# Validation set
+
+&lt;img src="img/validation-set.png" width="635" style="display: block; margin: auto;" /&gt;
+
+---
+
+# LOOCV
+
+&lt;img src="img/loocv.png" width="644" style="display: block; margin: auto;" /&gt;
+
+---
+
+# k-fold Cross Validation
+
+&lt;img src="img/k-fold-cv.png" width="609" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Regularização
+
+- Regulariação se refere à técnica de incluir penalizações no algoritmo de estimação que encolhem as estimativas na direção do zero.
+
+- Essa técnica pode levar a uma redução substencial da variância das predições ao custo de um pequeno aumento de viés.
+
+---
+
+# Regressão Ridge
+
+Regularização considerando estimação por mínimos quadrados.
+
+`$$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p \beta_j^2$$`
+
+
+---
+
+# LASSO
+
+**LASSO**
+
+(least absolute shrinkage and selection operator)
+
+
+`$$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p |\beta_j|$$`
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="js/macro.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
