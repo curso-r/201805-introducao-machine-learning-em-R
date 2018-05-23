@@ -17,6 +17,18 @@ output:
 options(htmltools.dir.version = FALSE)
 ```
 
+# caret
+
+* Pacote do R!
+* Criado pelo Max Kuhn (hoje no RStudio)
+
+![:scale 40%](https://avatars1.githubusercontent.com/u/5731043?s=400&v=4)
+
+* Abreviação de _Classification And Regression Training_
+* Primeira versão em 2007
+ 
+---
+
 # Motivação
 
 * Cada pacote do R tem a sua forma de especificar o modelo
@@ -35,11 +47,27 @@ Como pedir a estimativa da probabilidade em um modelo binário em diversas funç
 ---
 class: center, middle
 
-# Framework Padronizado
+# caret
 
 ## Menor atrito cognitivo para ajustar muitos modelos
 
 ![:scale 70%](https://upload.wikimedia.org/wikipedia/commons/b/b5/A_Ariel_view_of_Carot.jpg)
+
+---
+
+# caret
+
+Inclui funções para:
+
+* separação dos dados
+* pré-processamento
+* seleção de variáveis
+* tuning de modelos e validação cruzada
+* estimação de importância de variáveis
+
+Todas criadas de forma padronizada.
+
+![:scale 35%](https://cdn.notonthehighstreet.com/system/product_images/images/002/128/349/original_rabbit-and-carrots-wrapping-paper-set.jpg)
 
 ---
 
@@ -49,6 +77,56 @@ class: center, middle
 * `parsnip`: [https://github.com/topepo/parsnip](https://github.com/topepo/parsnip) (em desenvolvimento)
 
 ![:scale 70%](https://www.simplyrecipes.com/wp-content/uploads/2009/12/parsnips-horiz-1800.jpg)
+
+* `scikit-learn`: [https://github.com/scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn) (python)
+
+---
+
+# Exemplo: Diamonds
+
+```{r}
+library(ggplot2)
+diamonds
+```
+
+**Objetivo**: Prever o preço dadas outras características do diamante.
+
+---
+
+# Visualização
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, fig.width=10, fig.height=4}
+library(caret)
+library(dplyr)
+featurePlot(
+  x = diamonds %>% select(-price) %>% select_if(is.numeric),
+  y = diamonds$price,
+  plot = "scatter",
+  layout = c(6, 1),
+  scales = list(x = list(relation = "free"))
+)
+```
+
+---
+
+# Regressão linear
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
