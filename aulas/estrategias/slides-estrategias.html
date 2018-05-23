@@ -22,25 +22,91 @@ class: center, middle, inverse, title-slide
 
 
 
-# Sumário
+# Vamos falar de
 
 - Viés e variância
 
-- Base treino e base teste
+- Erro de treino e erro de teste
 
 - Validação cruzada
 
-- Estimando a performance do modelo
+---
+
+# Exemplo: nota na P1 de Cálculo I
+
+&lt;img src = "img/box.png" class = "center2"&gt;
+
+- y: nota na P1 de cálculo
+
+--
+
+
+- x: variáveis que podem interferir na nota
+
+--
+
+&gt; inteligência (alta/baixa)
+
+--
+
+&gt; dificuldade (fácil/difícil)
+
+--
+
+&gt; professor (bom/ruim)
+
+--
+
+&gt; ...
 
 ---
 
-# Viés/variância
+# Fontes de erro
 
-- **Viés**: o erro induzido por aproximar um fenômeno real, que pode pode ser extremamente complicado, por um modelo muito mais simples.
+`$$y \approx \beta_0 + \beta_1 \text{int} + \beta_2 \text{dif} + \beta_3 \text{prof} + \dots$$`
+
+--
+
+Fontes de erro:
+
+- Relação funcional entre `\(x\)` e `\(y\)`
+
+--
+
+- Ausência de variáveis importantes para explicar `\(y\)`
+
+--
+
+- Erro de medida
+
+--
+
+- etc
+
+--
+
+&lt;br&gt;
+
+- **Viés**: erro induzido por aproximar um fenômeno real, que pode pode ser extremamente complicado, por um modelo muito mais simples.
+
+
+&lt;!-- We would like our model to have minimum variance and minimum bias. But what we see in practice is that methods that reduce variance usually increases bias and vice-versa. --&gt;
+
+---
+
+# Generalização
+
+Será que o modelo ajustado será útil para estimar a nota de alunos que não estavam na amostra?
+
+--
 
 - **Variância**: o quanto as estimativas dos parâmetros mudariam se nós os estimarmos usando uma base diferente. 
 
-&lt;!-- We would like our model to have minimum variance and minimum bias. But what we see in practice is that methods that reduce variance usually increases bias and vice-versa. --&gt;
+&lt;br&gt;
+
+--
+
+Trade-off: gostaríamos que nosso modelo tenha viés e variância mínimos, mas o que vemos na prática é que os métodos para redução da variância geralmente aumentam o viés e vice-versa.
 
 ---
 
@@ -194,6 +260,14 @@ E se nós obtermos mais dados? As curvas representam os modelos ajustados com os
 
 ---
 
+# Over-fitting
+
+- Over-fitting ocorre quando o modelo absorve de forma inadequada comportamentos da amostra que não são generalizáveis para novas observações.
+
+- No exemplo, uma escolha ruim do grau do polinômio está gerando over-fitting.
+
+---
+
 # Exemplo
 
 Agora ajustando nos dados novos.
@@ -253,7 +327,11 @@ Agora ajustando nos dados novos.
 
 ---
 
-# Erros de treino e teste
+# Estimando a performance do modelo
+
+Como estimar o viés e a variância do modelo?
+
+--
 
 - **Erro de treino**: é o erro encontrado ao aplicar o modelo na própria base utilizada para treiná-lo.
 
@@ -261,21 +339,32 @@ Agora ajustando nos dados novos.
 
 ---
 
-# Validação cruzada
+# Separação da base
 
-**Validação cruzada**: usar uma porção dos dados, que não foi utilizada para no treino, para avaliar o erro de teste.
+- **base de treino**: observaçlões utilizadas para estimar os parâmetros do modelo e determinar os parâmetros de complexidade (hiperparâmetros)
 
-Tipos:
+- **base de teste**: observações utilizadas para estimar o erro de teste. Essas observações não devem ser usadas para treinar o modelo.
 
-- Validation set
-- LOOCV
-- k-fold cross-validation
+--
+
+- Muitas observações na base de treino vão levar a estimativas mais precisas para os parâmetros, mas não teremos uma boa estimativa da performance do modelo.
+
+- Muitas observações na base de teste não vão permitir termos boas estimativas dos parâmetros.
 
 ---
 
-# Validation set
+# Selecionando hiperparâmetros
 
-&lt;img src="img/validation-set.png" width="635" style="display: block; margin: auto;" /&gt;
+E como fazemos para determinar os parâmetros de complexidade?
+
+--
+
+**Validação cruzada**: método para estimar o erro preditivo de um modelo utilizando reamostragem.
+
+--
+
+- Leave-one-out cross-validation (LOOCV)
+- K-fold cross-validation
 
 ---
 
@@ -285,37 +374,9 @@ Tipos:
 
 ---
 
-# k-fold Cross Validation
+# k-fold
 
 &lt;img src="img/k-fold-cv.png" width="609" style="display: block; margin: auto;" /&gt;
-
----
-
-# Regularização
-
-- Regulariação se refere à técnica de incluir penalizações no algoritmo de estimação que encolhem as estimativas na direção do zero.
-
-- Essa técnica pode levar a uma redução substencial da variância das predições ao custo de um pequeno aumento de viés.
-
----
-
-# Regressão Ridge
-
-Regularização considerando estimação por mínimos quadrados.
-
-`$$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p \beta_j^2$$`
-
-
----
-
-# LASSO
-
-**LASSO**
-
-(least absolute shrinkage and selection operator)
-
-
-`$$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p |\beta_j|$$`
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="js/macro.js"></script>

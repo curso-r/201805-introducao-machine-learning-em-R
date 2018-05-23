@@ -80,7 +80,7 @@ options(htmltools.dir.version = FALSE)
 
 # O que é Machine Learning?
 
-Machine Learning é o campo de estudo que dá aos computadores a abilidade de 
+Machine Learning é o campo de estudo que dá aos computadores a habilidade de 
 aprender sem serem explicitamente programados para isso (Arthur Samuel, 1959).
 
 <br>
