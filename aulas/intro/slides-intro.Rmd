@@ -1,0 +1,186 @@
+---
+title: "Machine Learning com R"
+subtitle: "Introdução"
+author: "@Curso-R"
+date: "23-05-2018"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["default", "default-fonts", "custom.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: js/macro.js
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+# Quem somos
+
+<img src="img/daniel.jpeg" class="dan">
+
+<img src="img/william.jpg" class="willy">
+
+<div class="dan">
+  <lu>
+    <li> Daniel Falbel </li>
+    <li> dfalbel@curso-r.com </li>
+    <li> IME-USP / Curso-R </li>
+  </lu>
+</div>
+
+<div class="willy">
+  <lu>
+    <li> William Amorim </li>
+    <li> williamorim@curso-r.com </li>
+    <li> IME-USP / Curso-R </li>
+  </lu>
+</div>
+
+---
+
+# Sumário
+
+- O que é Machine Learning?
+
+- Machine Learning e Estatística
+
+- Entendendo o problema
+
+---
+
+# O que é Machine Learning?
+
+<br>
+
+- Um campo **dentro** da Inteligência Artificial
+
+--
+
+<img src="img/marvin.png" class="cantodireito" width=100>
+
+--
+
+- Existe um grande hype em volta do tema (~50 artigos por dia no Arxiv!!!)
+
+--
+
+- Não é um termo novo: cunhado por Arthur Samuel, em 1959
+
+<img src="img/arthur-sam.png" class="center2" width=100>
+
+--
+
+- Poderio computacional e disponibilidade de dados
+
+---
+
+# O que é Machine Learning?
+
+Machine Learning é o campo de estudo que dá aos computadores a habilidade de 
+aprender sem serem explicitamente programados para isso (Arthur Samuel, 1959).
+
+<br>
+
+--
+
+Um computador está aprendendo com a experiência E com respeito a alguma tarefa T e uma medida de performance P se sua performance P em T melhora com a experiência E (Tom Mitchell, 1998).
+
+<br>
+
+--
+
+Machine learning é um framework de análise de dados que visa gerar a estimativa mais precisa possível para uma quantidade ou fenômeno (Max Kuhn, 2014).
+
+---
+
+# O que é Machine Learning?
+
+<br>
+
+<img src = "img/nazare.jpg" class = "center2">
+
+---
+
+# Machine Learning e Estatística
+
+<img src = "img/box.png" class = "center2">
+
+--
+
+1) Gostaríamos de saber como $x$ e $y$ estão relacionadas.
+
+--
+
+2) Gostaríamos de prever $y$ a partir de $x$.
+
+--
+
+<br>
+
+Matematicamente, queremos encontrar uma função $f()$ tal que:
+
+$$
+y \approx f(x)
+$$
+
+---
+
+# Machine Learning e Estatística
+
+ <img src="img/box-data-models.png" class = "center2"> 
+ 
+--
+
+<br>
+<br>
+ 
+  <img src="img/box-algorithmic-models.png" class = "center2"> 
+  
+---
+
+# Pensamento crítico
+
+<br>
+<br>
+<br>
+
+- Entender o problema
+
+- Manter foco no objetivo
+
+- Definir a métrica
+
+<img src="https://media.giphy.com/media/sqefuSs2oD8sg/giphy.gif" class="smart_cat">
+
+---
+
+# Entender o problema
+
+<img src="img/aviao.png" class="center2">
+
+---
+
+# Manter foco no objetivo
+
+<img src="img/ozonio.jpeg" class="ozonio">
+
+<img src="img/carros.jpg" class="carros">
+
+---
+
+# Definir a métrica
+
+<img src="img/google.png" class="google">
+
+---
+
+# Definir a métrica
+
+<br>
+<br>
+
+<img src="img/submarino.png" class="center2">

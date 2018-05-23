@@ -1,0 +1,79 @@
+---
+title: "Machine Learning com R"
+subtitle: "Estratégias"
+author: "@Curso-R"
+date: "23-05-2018"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["default", "default-fonts", "custom.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: js/macro.js
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  message = FALSE, 
+  warning = FALSE,
+  fig.width=6, 
+  fig.height=6,
+  fig.align='center'
+)
+
+library(tidyverse)
+```
+
+# Regularização
+
+- Regulariação se refere à técnica de incluir penalizações no algoritmo de estimação que encolhem as estimativas na direção do zero.
+
+- Essa técnica pode levar a uma redução substa  ncial da variância das predições ao custo de um pequeno aumento de viés.
+
+---
+
+# Regressão Ridge
+
+Regularização considerando estimação por mínimos quadrados.
+
+$$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p \beta_j^2$$
+
+- O hiperparâmetro $\lambda$ controla o impacto da penalização nas estimativas dos parâmetros.
+
+- O que acontece quando $\lambda \longrightarrow 0$?
+
+- O que acontece quando $\lambda \longrightarrow \infty?
+
+- As estimativas obtidas minimizando essa expressão não serão invariantes à escala.
+
+- $\beta_i = 0$ apenas se $\lambda = \infty$.
+
+- Vamos ter um conjunto de estimativas diferentes para cada valor de $\lambda$.
+
+---
+
+# LASSO
+
+(least absolute shrinkage and selection operator)
+
+
+$$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p |\beta_j|$$
+- Para $\lambda$ suficientemente grande, alguns parâmetros serão estimados exatamente como 0.
+
+- O que acontece quando $\lambda \longrightarrow 0$? E quando $\lambda \longrightarrow \infty$?
+
+---
+
+# Outra formulação
+
+$$\underset{\beta}{\text{minimizar}}\left\{\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2\right\} \text{ sujeito à } \sum_{j=1}^p \beta_j^2 \leq s \text{ ou } \sum_{j=1}^p |\beta_j| \leq s$$
+--
+
+```{r}
+knitr::include_graphics("img/lasso_ridge.png")
+```
