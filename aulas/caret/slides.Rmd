@@ -117,6 +117,16 @@ model
 ```
 ---
 
+### Faznedo predições
+
+```{r}
+preds <- predict(model, diamonds)
+head(preds)
+```
+
+---
+
+
 ### Cross Validation
 
 ```{r}
@@ -242,6 +252,11 @@ model <- train(
 model
 ```
 
+---
+
+```{r}
+plot(model)
+```
 
 
 
