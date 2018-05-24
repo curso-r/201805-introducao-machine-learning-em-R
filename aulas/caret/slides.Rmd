@@ -26,7 +26,7 @@ options(htmltools.dir.version = FALSE)
 
 * Abreviação de _Classification And Regression Training_
 * Primeira versão em 2007
- 
+
 ---
 
 # Motivação
@@ -96,26 +96,151 @@ diamonds
 # Visualização
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, fig.width=10, fig.height=4}
-library(caret)
+library(GGally)
 library(dplyr)
-featurePlot(
-  x = diamonds %>% select(-price) %>% select_if(is.numeric),
-  y = diamonds$price,
-  plot = "scatter",
-  layout = c(6, 1),
-  scales = list(x = list(relation = "free"))
+colunas <- names(diamonds)
+ggduo(
+  diamonds %>% sample_n(1000), 
+  columnsY = "price", columnsX = colunas[colunas != "price"]
 )
 ```
 
 ---
 
-# Regressão linear
+### Regressão linear
+
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+model <- train(price ~ carat + x, data = diamonds, method = "lm")
+model
+```
+---
+
+### Cross Validation
+
+```{r}
+train_control <- trainControl(method="cv", number=5)
+model <- train(
+  price ~ carat + x, data = diamonds, 
+  method = "lm", 
+  trControl = train_control
+)
+model
+```
+
+---
+
+### Exercício
+
+Como faz para usar LOOCV?
+
 
 ```{r}
 
 ```
 
 
+---
+
+### Outra função
+
+
+```{r}
+MSE <- function(data, lev = NULL, model = NULL) {
+  out <- sum((data$obs - data$pred)^2)/nrow(data)
+  names(out) <- "MSE"
+  out
+}
+```
+
+```{r}
+train_control <- trainControl(method="cv", number=5, summaryFunction = MSE)
+model <- train(
+  price ~ carat + x, data = diamonds, 
+  method = "lm", 
+  trControl = train_control,
+  metric = "MSE"
+)
+```
+
+---
+
+```{r}
+model
+```
+
+
+---
+
+### Seleção de variáveis
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo = TRUE, results='hide'}
+x <- diamonds %>% select(-price) %>% model.matrix(~., data = .)
+y <- diamonds$price
+
+ctrl <- rfeControl(
+  functions = lmFuncs,
+  method = "cv",
+  number = 5,
+  verbose = TRUE
+)
+
+model <- rfe(
+  x = x, 
+  y = y, 
+  sizes = c(1, 5, 7), 
+  rfeControl = ctrl
+)
+```
+
+---
+
+```{r}
+model
+```
+
+---
+
+### Árvores de decisão
+
+```{r message=FALSE, warning=FALSE}
+train_control <- trainControl(method="cv", number=5)
+model <- train(
+  price ~ ., data = diamonds, 
+  method = "rpart", 
+  trControl = train_control
+)
+```
+
+---
+
+```{r}
+model
+```
+
+
+
+---
+
+### Modificando o grid de parametros
+
+```{r message=FALSE, warning=FALSE}
+train_control <- trainControl(method="cv", number=5)
+tuning_grid <- data.frame(cp = c(0.03365116/2, 0.03365116, 2*0.03365116))
+model <- train(
+  price ~ ., data = diamonds, 
+  method = "rpart", 
+  trControl = train_control, 
+  tuneGrid = tuning_grid
+)
+```
+
+---
+
+```{r}
+model
+```
 
 
 
