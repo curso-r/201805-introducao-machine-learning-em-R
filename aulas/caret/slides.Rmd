@@ -258,13 +258,46 @@ model
 plot(model)
 ```
 
+---
+
+### Regressão logística
+
+```{r message=FALSE, warning=FALSE}
+titanic <- readr::read_csv('https://github.com/curso-r/pu.modelos/raw/master/data/titanic-train.csv')
+
+dplyr::glimpse(titanic)
+```
+
+---
+
+### Regressão logística
+
+Exercício: visualizar a relação entre o número de sobreviventes e os preditores: Sex, Age, Fare, Pclass.
+
+```{r}
+
+```
 
 
+---
 
+### Regressão logística
 
+Exercício: ajustar o modelo de regressão logística usando o `caret`.
 
+```{r message=FALSE, warning=FALSE}
 
+```
 
+---
+
+### Árvores de classificação
+
+Exercício: repetir a análise feita com regressão logística utilizando árvores de decisão.
+
+```{r message=FALSE, warning=FALSE}
+
+```
 
 
 
