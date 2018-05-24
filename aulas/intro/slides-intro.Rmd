@@ -20,7 +20,7 @@ options(htmltools.dir.version = FALSE)
 
 # Quem somos
 
-<img src="img/daniel.jpeg" class="dan">
+<img src="img/dani.png" class="dan">
 
 <img src="img/william.jpg" class="willy">
 
@@ -42,13 +42,13 @@ options(htmltools.dir.version = FALSE)
 
 ---
 
-# Sumário
+# O que vamos falar?
 
 - O que é Machine Learning?
 
 - Machine Learning e Estatística
 
-- Entendendo o problema
+- Pensamento crítico
 
 ---
 
