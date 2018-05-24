@@ -14,12 +14,24 @@ class: center, middle, inverse, title-slide
 # caret
 ## Machine Learning com R
 ### <span class="citation">@Curso-R</span>
-### 14-05-2018
+### 24-05-2018
 
 ---
 
 
 
+
+# caret
+
+* Pacote do R!
+* Criado pelo Max Kuhn (hoje no RStudio)
+
+![:scale 40%](https://avatars1.githubusercontent.com/u/5731043?s=400&amp;v=4)
+
+* Abreviação de _Classification And Regression Training_
+* Primeira versão em 2007
+
+---
 
 # Motivação
 
@@ -39,11 +51,27 @@ Como pedir a estimativa da probabilidade em um modelo binário em diversas funç
 ---
 class: center, middle
 
-# Framework Padronizado
+# caret
 
 ## Menor atrito cognitivo para ajustar muitos modelos
 
 ![:scale 70%](https://upload.wikimedia.org/wikipedia/commons/b/b5/A_Ariel_view_of_Carot.jpg)
+
+---
+
+# caret
+
+Inclui funções para:
+
+* separação dos dados
+* pré-processamento
+* seleção de variáveis
+* tuning de modelos e validação cruzada
+* estimação de importância de variáveis
+
+Todas criadas de forma padronizada.
+
+![:scale 35%](https://cdn.notonthehighstreet.com/system/product_images/images/002/128/349/original_rabbit-and-carrots-wrapping-paper-set.jpg)
 
 ---
 
@@ -53,6 +81,309 @@ class: center, middle
 * `parsnip`: [https://github.com/topepo/parsnip](https://github.com/topepo/parsnip) (em desenvolvimento)
 
 ![:scale 70%](https://www.simplyrecipes.com/wp-content/uploads/2009/12/parsnips-horiz-1800.jpg)
+
+* `scikit-learn`: [https://github.com/scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn) (python)
+
+---
+
+# Exemplo: Diamonds
+
+
+```r
+library(ggplot2)
+diamonds
+```
+
+```
+## # A tibble: 53,940 x 10
+##    carat cut       color clarity depth table price     x     y     z
+##    &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 0.230 Ideal     E     SI2      61.5   55.   326  3.95  3.98  2.43
+##  2 0.210 Premium   E     SI1      59.8   61.   326  3.89  3.84  2.31
+##  3 0.230 Good      E     VS1      56.9   65.   327  4.05  4.07  2.31
+##  4 0.290 Premium   I     VS2      62.4   58.   334  4.20  4.23  2.63
+##  5 0.310 Good      J     SI2      63.3   58.   335  4.34  4.35  2.75
+##  6 0.240 Very Good J     VVS2     62.8   57.   336  3.94  3.96  2.48
+##  7 0.240 Very Good I     VVS1     62.3   57.   336  3.95  3.98  2.47
+##  8 0.260 Very Good H     SI1      61.9   55.   337  4.07  4.11  2.53
+##  9 0.220 Fair      E     VS2      65.1   61.   337  3.87  3.78  2.49
+## 10 0.230 Very Good H     VS1      59.4   61.   338  4.00  4.05  2.39
+## # ... with 53,930 more rows
+```
+
+**Objetivo**: Prever o preço dadas outras características do diamante.
+
+---
+
+# Visualização
+
+
+```r
+library(GGally)
+library(dplyr)
+colunas &lt;- names(diamonds)
+ggduo(
+  diamonds %&gt;% sample_n(1000), 
+  columnsY = "price", columnsX = colunas[colunas != "price"]
+)
+```
+
+![](slides_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+---
+
+### Regressão linear
+
+
+
+```r
+library(caret)
+model &lt;- train(price ~ carat + x, data = diamonds, method = "lm")
+model
+```
+
+```
+## Linear Regression 
+## 
+## 53940 samples
+##     2 predictor
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 53940, 53940, 53940, 53940, 53940, 53940, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   1532.307  0.8523831  913.6225
+## 
+## Tuning parameter 'intercept' was held constant at a value of TRUE
+```
+---
+
+### Cross Validation
+
+
+```r
+train_control &lt;- trainControl(method="cv", number=5)
+model &lt;- train(
+  price ~ carat + x, data = diamonds, 
+  method = "lm", 
+  trControl = train_control
+)
+model
+```
+
+```
+## Linear Regression 
+## 
+## 53940 samples
+##     2 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 43152, 43152, 43152, 43152, 43152 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   1527.178  0.8535034  914.6171
+## 
+## Tuning parameter 'intercept' was held constant at a value of TRUE
+```
+
+---
+
+### Exercício
+
+Como faz para usar LOOCV?
+
+
+
+
+
+---
+
+### Outra função
+
+
+
+```r
+MSE &lt;- function(data, lev = NULL, model = NULL) {
+  out &lt;- sum((data$obs - data$pred)^2)/nrow(data)
+  names(out) &lt;- "MSE"
+  out
+}
+```
+
+
+```r
+train_control &lt;- trainControl(method="cv", number=5, summaryFunction = MSE)
+model &lt;- train(
+  price ~ carat + x, data = diamonds, 
+  method = "lm", 
+  trControl = train_control,
+  metric = "MSE"
+)
+```
+
+---
+
+
+```r
+model
+```
+
+```
+## Linear Regression 
+## 
+## 53940 samples
+##     2 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 43152, 43152, 43152, 43152, 43152 
+## Resampling results:
+## 
+##   MSE    
+##   2333936
+## 
+## Tuning parameter 'intercept' was held constant at a value of TRUE
+```
+
+
+---
+
+### Seleção de variáveis
+
+
+```r
+x &lt;- diamonds %&gt;% select(-price) %&gt;% model.matrix(~., data = .)
+y &lt;- diamonds$price
+
+ctrl &lt;- rfeControl(
+  functions = lmFuncs,
+  method = "cv",
+  number = 5,
+  verbose = TRUE
+)
+
+model &lt;- rfe(
+  x = x, 
+  y = y, 
+  sizes = c(1, 5, 7), 
+  rfeControl = ctrl
+)
+```
+
+---
+
+
+```r
+model
+```
+
+```
+## 
+## Recursive feature selection
+## 
+## Outer resampling method: Cross-Validated (5 fold) 
+## 
+## Resampling performance over subset size:
+## 
+##  Variables RMSE Rsquared    MAE RMSESD RsquaredSD  MAESD Selected
+##          1 1548   0.8494 1007.5  20.02   0.003587  5.488         
+##          5 1196   0.9102  811.6  19.65   0.002722 20.352         
+##          7 1159   0.9155  762.7  23.22   0.003156  7.921         
+##         24 1131   0.9197  740.4  21.04   0.002835  5.633        *
+## 
+## The top 5 variables (out of 24):
+##    carat, clarity.L, color.L, clarity.Q, x
+```
+
+---
+
+### Árvores de decisão
+
+
+```r
+train_control &lt;- trainControl(method="cv", number=5)
+model &lt;- train(
+  price ~ ., data = diamonds, 
+  method = "rpart", 
+  trControl = train_control
+)
+```
+
+---
+
+
+```r
+model
+```
+
+```
+## CART 
+## 
+## 53940 samples
+##     9 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 43152, 43152, 43152, 43152, 43152 
+## Resampling results across tuning parameters:
+## 
+##   cp          RMSE      Rsquared   MAE     
+##   0.03365116  1747.435  0.8076306  1202.802
+##   0.18605980  2230.609  0.6805251  1562.956
+##   0.60834997  3394.602  0.6064545  2510.817
+## 
+## RMSE was used to select the optimal model using the smallest value.
+## The final value used for the model was cp = 0.03365116.
+```
+
+
+
+---
+
+### Modificando o grid de parametros
+
+
+```r
+train_control &lt;- trainControl(method="cv", number=5)
+tuning_grid &lt;- data.frame(cp = c(0.03365116/2, 0.03365116, 2*0.03365116))
+model &lt;- train(
+  price ~ ., data = diamonds, 
+  method = "rpart", 
+  trControl = train_control, 
+  tuneGrid = tuning_grid
+)
+```
+
+---
+
+
+```r
+model
+```
+
+```
+## CART 
+## 
+## 53940 samples
+##     9 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 43152, 43152, 43152, 43152, 43152 
+## Resampling results across tuning parameters:
+## 
+##   cp          RMSE      Rsquared   MAE      
+##   0.01682558  1383.418  0.8797586   887.4968
+##   0.03365116  1747.537  0.8075036  1202.0090
+##   0.06730232  1809.059  0.7943754  1310.6561
+## 
+## RMSE was used to select the optimal model using the smallest value.
+## The final value used for the model was cp = 0.01682558.
+```
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="js/macro.js"></script>

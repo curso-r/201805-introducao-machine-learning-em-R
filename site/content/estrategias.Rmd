@@ -2,7 +2,7 @@
 title: Estratégias Gerais
 ---
 
-<a href = "../case.zip"><button>Download</button></a>
+<a href = "../estrategias.zip"><button>Download</button></a>
 
 # Duração 
 
