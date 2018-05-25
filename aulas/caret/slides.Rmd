@@ -86,7 +86,9 @@ Todas criadas de forma padronizada.
 
 ```{r}
 library(ggplot2)
+library(dplyr)
 diamonds
+glimpse(diamonds)
 ```
 
 **Objetivo**: Prever o preço dadas outras características do diamante.
@@ -146,10 +148,15 @@ model
 Como faz para usar LOOCV?
 
 
-```{r}
-
+```{r, eval = FALSE}
+train_control <- trainControl(method="LOOCV")
+model <- train(
+  price ~ carat + x, data = diamonds, 
+  method = "lm", 
+  trControl = train_control
+)
+model
 ```
-
 
 ---
 
@@ -186,7 +193,8 @@ model
 ### Seleção de variáveis
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo = TRUE, results='hide'}
-x <- diamonds %>% select(-price) %>% model.matrix(~., data = .)
+x <- diamonds %>% select(-price)
+x <- model.matrix(~., data = x)
 y <- diamonds$price
 
 ctrl <- rfeControl(
@@ -257,6 +265,13 @@ model
 ```{r}
 plot(model)
 ```
+
+---
+```{r}
+plot(model$finalModel)
+text(model$finalModel)
+```
+
 
 ---
 
