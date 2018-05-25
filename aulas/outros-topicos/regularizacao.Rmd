@@ -29,11 +29,49 @@ knitr::opts_chunk$set(
 library(tidyverse)
 ```
 
+# Funções de perda
+
+Queremos encontrar funções $f$ tais que
+
+$$Y \approx f(X)$$
+
+--
+
+Para isso, definimos uma função de perda $L(y, f)$ e encontramos a função $\hat{f}$ que minimiza essa função.
+
+--
+
+- Mínimos quadrados
+
+$$\sum_{i=1}^n \left(y_i - f(x_i)\right)^2 = \sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2$$
+
+--
+
+- Verossimilhança
+
+$$- f(y_1, \dots, y_n) \stackrel{\text{iid}}{=} - \prod_{i=1}^{n}f(y_i)$$
+
+--
+
+Por que apenas a minimização da função de perda não garante que a $\hat{f}$ obtida seja uma boa escolha?
+
+---
+
 # Regularização
 
-- Regulariação se refere à técnica de incluir penalizações no algoritmo de estimação que encolhem as estimativas na direção do zero.
+- Regulariação se refere à técnica de incluir penalizações na função de perda que encolhem as estimativas na direção do zero.
 
-- Essa técnica pode levar a uma redução substa  ncial da variância das predições ao custo de um pequeno aumento de viés.
+--
+
+- Essa técnica pode levar a uma redução substancial da variância das predições ao custo de um pequeno aumento de viés.
+
+--
+
+Vamos falar de:
+
+- Regressão Ridge
+
+- LASSO
 
 ---
 
@@ -41,17 +79,29 @@ library(tidyverse)
 
 Regularização considerando estimação por mínimos quadrados.
 
-$$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p \beta_j^2$$
+$$L(y, f) = \sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p \beta_j^2$$
+
+--
 
 - O hiperparâmetro $\lambda$ controla o impacto da penalização nas estimativas dos parâmetros.
 
+--
+
 - O que acontece quando $\lambda \longrightarrow 0$?
 
-- O que acontece quando $\lambda \longrightarrow \infty?
+--
+
+- O que acontece quando $\lambda \longrightarrow \infty$?
+
+--
 
 - As estimativas obtidas minimizando essa expressão não serão invariantes à escala.
 
+--
+
 - $\beta_i = 0$ apenas se $\lambda = \infty$.
+
+--
 
 - Vamos ter um conjunto de estimativas diferentes para cada valor de $\lambda$.
 
@@ -63,7 +113,12 @@ $$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lam
 
 
 $$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \lambda \sum_{j=1}^p |\beta_j|$$
+
+--
+
 - Para $\lambda$ suficientemente grande, alguns parâmetros serão estimados exatamente como 0.
+
+--
 
 - O que acontece quando $\lambda \longrightarrow 0$? E quando $\lambda \longrightarrow \infty$?
 

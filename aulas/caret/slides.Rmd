@@ -290,7 +290,12 @@ dplyr::glimpse(titanic)
 Exercício: visualizar a relação entre o número de sobreviventes e os preditores: Sex, Age, Fare, Pclass.
 
 ```{r}
-
+titanic %>%
+  ggplot(aes(x = Survived, fill = Sex), position = "dodge") +
+  geom_bar() +
+  facet_wrap(~variable)
+  
+  
 ```
 
 
