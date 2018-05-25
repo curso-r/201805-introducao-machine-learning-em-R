@@ -1,6 +1,6 @@
 ---
 title: "Machine Learning com R"
-subtitle: "Estratégias"
+subtitle: "Outros Tópicos"
 author: "@Curso-R"
 date: "23-05-2018"
 output:
@@ -132,3 +132,101 @@ $$\underset{\beta}{\text{minimizar}}\left\{\sum_{i=1}^n \left(y_i - \beta_0 - \s
 ```{r}
 knitr::include_graphics("img/lasso_ridge.png")
 ```
+
+---
+
+## Exemplo
+
+```{r echo=TRUE}
+library(caret)
+library(ggplot2)
+
+train_control <- trainControl(method = "cv", number = 5)
+model <- train(price ~., data = diamonds, method = "glmnet", 
+               trControl = train_control)
+```
+
+---
+
+## Elastic Net
+
+$$\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p \beta_j x_{ij}\right)^2 + \alpha(\lambda \sum_{j=1}^p |\beta_j|) + (1-\alpha)(\lambda \sum_{j=1}^p \beta_j ^2)$$
+
+---
+
+## Exercício: Faça CV para encontrar o melhor LASSO
+
+**Dica**: lembre como faz para passar hiper-parâmetros pré-definidos para o caret.
+
+```{r echo=TRUE}
+
+```
+
+---
+
+## Ensemble learning
+
+Usa muitos modelos para obter poder preditivo maior do que se fosse usado apenas um dos modelos.
+
+### Principais Métodos
+
+* Bagging
+* Boosting
+* Stacking
+
+---
+
+## Bagging
+
+* Pega A amostras com reposição da base de treino
+* Para cada amostra "a"" em "A" treinamos um modelo
+* No final fazemos a média das predições de todos os modelos
+
+![](https://upload.wikimedia.org/wikipedia/en/d/de/Ozone.png)
+
+---
+
+## Random Forests
+
+* Pega A amostras com reposição da base de treino
+* A base de treino possui $p$ variáveis
+* Para cada amostra $a$ em $A$ selecione aleatóriamente um conjunto de tamanho $m < p$ das variáveis
+* Para cada amostra $a$ em $A$ treine uma árvore de decisão com as $m$ variáveis selecionadas.
+* Combine todas as árvores fazendo a média das previsões individuais.
+
+---
+
+## Boosting
+
+* Inicie o modelo como $\hat{f}(x) = 0$ e $r_i = y_i$ para todo $i$ na base de treino.
+* Considere B o número de modelos que você vai fazer.
+    * Ajuste o modelo $b$ para a base de treino e use como respota o valor $r$. 
+    * Atualize $\hat{f}(x)$ da seguinte forma: $\hat{f}(x) = \hat{f}(x) + \lambda\hat{f_b}(x)$
+    * Atualize os resíduos $r_i$ = $r_{i} - \lambda\hat{f_b}(x) 
+* O seu modelo será:
+
+$$\hat{f}(x) = \sum_{b = 1}^{B} \lambda \hat{f_b}(x)$$
+
+---
+
+## Random Forest
+
+```{r, echo = TRUE, eval = FALSE}
+train_control <- trainControl(method = "cv", number = 5)
+model <- train(price ~., dplyr::sample_n(diamonds,1000), method = "ranger",
+               trControl = train_control)
+```
+
+---
+
+## Boosting
+
+```{r, echo = TRUE, eval = FALSE}
+train_control <- trainControl(method = "cv", number = 5)
+model <- train(price ~., dplyr::sample_n(diamonds,1000), method = "gbm",
+               trControl = train_control)
+```
+
+
+
+

@@ -2,7 +2,7 @@
 title: Outros Tópicos
 ---
 
-<a href = "../visualizacao.zip"><button>Download</button></a>
+<a href = "../outros-topicos.zip"><button>Download</button></a>
 
 # Duração
 
