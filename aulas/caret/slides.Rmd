@@ -362,7 +362,30 @@ summary(model)
 Exercício: repetir a análise feita com regressão logística utilizando árvores de decisão.
 
 ```{r message=FALSE, warning=FALSE}
+train_control <- trainControl(method="cv", number=5)
+model <- train(
+  factor(Survived) ~ Age + Pclass + Sex + Fare, 
+  data = titanic_sem_na,
+  method = "rpart", 
+  trControl = train_control
+)
+model
 
+plot(model$finalModel)
+text(model$finalModel)
+```
+
+---
+
+```{r}
+tuning_grid <- data.frame(cp = 0.001*(1:10))
+model <- train(
+  factor(Survived) ~ Age + Pclass + Sex + Fare, 
+  data = titanic_sem_na,
+  method = "rpart", 
+  trControl = train_control, 
+  tuneGrid = tuning_grid
+)
 ```
 
 
