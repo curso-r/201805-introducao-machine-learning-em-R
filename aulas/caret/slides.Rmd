@@ -291,11 +291,40 @@ Exercício: visualizar a relação entre o número de sobreviventes e os predito
 
 ```{r}
 titanic %>%
-  ggplot(aes(x = Survived, fill = Sex), position = "dodge") +
-  geom_bar() +
-  facet_wrap(~variable)
+  dplyr::mutate(
+    Survived = forcats::lvls_revalue(
+      as.factor(Survived), c("x_x", "Sobreviveu"))
+  ) %>% 
+  ggplot(aes(x = Sex, fill = Survived)) +
+  geom_bar(position = "dodge")
+
+titanic %>%
+  dplyr::mutate(
+    Survived = forcats::lvls_revalue(
+      as.factor(Survived), c("x_x", "Sobreviveu"))
+  ) %>% 
+  ggplot(aes(x = Pclass, fill = Survived)) +
+  geom_bar(position = "dodge")
   
-  
+```
+
+```{r}
+titanic %>%
+  dplyr::mutate(
+    Survived = forcats::lvls_revalue(
+      as.factor(Survived), c("x_x", "Sobreviveu"))
+  ) %>% 
+  ggplot(aes(x = Survived, y = Age)) +
+  geom_boxplot()
+
+titanic %>%
+  dplyr::mutate(
+    Survived = forcats::lvls_revalue(
+      as.factor(Survived), c("x_x", "Sobreviveu"))
+  ) %>% 
+  ggplot(aes(x = Survived, y = Fare)) +
+  geom_boxplot()
+
 ```
 
 
@@ -307,6 +336,23 @@ Exercício: ajustar o modelo de regressão logística usando o `caret`.
 
 ```{r message=FALSE, warning=FALSE}
 
+titanic_sem_na <- 
+  titanic %>%
+  dplyr::select(Survived, Age, Pclass, Sex, Fare) %>%
+  dplyr::mutate(Survived = as.factor(Survived)) %>% 
+  na.omit
+
+train_control <- trainControl(method="cv", number=5)
+model <- train(
+  factor(Survived) ~ Age + Pclass + Sex + Fare, 
+  data = titanic_sem_na,
+  method = "glm",
+  family = "binomial",
+  trControl = train_control
+)
+model
+
+summary(model)
 ```
 
 ---
